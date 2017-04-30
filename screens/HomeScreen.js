@@ -9,21 +9,22 @@ import {
   TouchableOpacity,
   View,
 } from 'react-native';
-import Map from './Map';
+import LocationComponent from './LocationComponent';
 
 import { MonoText } from '../components/StyledText';
 
 export default class HomeScreen extends React.Component {
   static route = {
     navigationBar: {
-      visible: false,
+      visible: true,
+      title: 'Honey Hole'
     },
   };
 
   render() {
     return (
       <View style={styles.container}>
-        <Map/>
+        <LocationComponent />
       </View>
     );
   }

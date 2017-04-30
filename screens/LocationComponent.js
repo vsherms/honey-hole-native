@@ -2,13 +2,19 @@ import React, { Component } from 'react';
 import { Platform, Text, View, StyleSheet } from 'react-native';
 import { Constants, Location, Permissions, MapView } from 'expo';
 import Button from 'react-native-button';
+import Router from '../navigation/Router';
+import { inject, observer } from 'mobx-react';
+import Form from './Form';
 
-
-export default class App extends Component {
-  state = {
-    location: null,
-    errorMessage: null,
-  };
+class LocationComponent extends Component {
+  constructor(){
+    super();
+    this.state = {
+      location: null,
+      errorMessage: null,
+    };
+    this.handleSavePosition = this.handleSavePosition.bind(this);
+  }
 
   componentWillMount() {
     if (Platform.OS === 'android' && !Constants.isDevice) {
@@ -20,6 +26,11 @@ export default class App extends Component {
     }
   }
 
+  handleSavePosition(){
+    this.props.locationStore.savePosition(this.props.userStore.userId);
+    this.props.locationStore.loggedLocation = true;
+  }
+
   _getLocationAsync = async () => {
     let { status } = await Permissions.askAsync(Permissions.LOCATION);
     if (status !== 'granted') {
@@ -29,8 +40,9 @@ export default class App extends Component {
     }
 
     let location = await Location.getCurrentPositionAsync({});
-    this.setState({ location });
-    console.log
+    this.props.locationStore.location = location;
+    // this.props.locationStore.getWeatherInfo();
+    this.setState({ location: location });
   };
 
   render() {
@@ -47,30 +59,34 @@ export default class App extends Component {
       mylatitude = this.state.location.coords.latitude;
       mylongitude = this.state.location.coords.longitude;
       coords = this.state.location.coords;
-      console.log(mylatitude);
+      console.log(coords);
     }
     let map = (
-      <MapView style={{flex:1}}
-      initialRegion={{
-      latitude: mylatitude,
-      longitude: mylongitude,
-      latitudeDelta: 0.0922,
-      longitudeDelta: 0.0421,
-    }}>
-      <MapView.Marker
-      styles={{zIndex: 1000}}
-      coordinate={coords}/>
-     </MapView>
+      <View style={{flex:1}}>
+        <MapView style={{flex:1}}
+        initialRegion={{
+        latitude: mylatitude,
+        longitude: mylongitude,
+        latitudeDelta: 0.0922,
+        longitudeDelta: 0.0421,
+      }}>
+        <MapView.Marker
+        styles={{zIndex: 1000}}
+        coordinate={coords}/>
+       </MapView>
+       <Button
+         containerStyle={{padding:50, height: 155, overflow:'hidden', backgroundColor: 'red'}}
+         style={{fontSize: 25, color: 'white'}}
+         onPress={this.handleSavePosition}
+       >Save Your Honey Hole!</Button>
+     </View>
     )
+
 
     return (
       <View style={{flex:1}}>
-        {this.state.location ? map : null}
-        <Button
-          containerStyle={{padding:50, height: 155, overflow:'hidden', backgroundColor: 'red'}}
-          style={{fontSize: 30, color: 'white'}}
-          onPress={this.logLocation}
-        >Log Your Honey</Button>
+      {this.state.location && !this.props.locationStore.loggedLocation ? map : null}
+      {this.props.locationStore.loggedLocation ? <Form/> : null}
       </View>
     );
   }
@@ -90,3 +106,10 @@ const styles = StyleSheet.create({
     textAlign: 'center',
   },
 });
+
+LocationComponent.propTypes = {
+  locationStore: React.PropTypes.object,
+  userStore: React.PropTypes.object
+}
+
+export default inject('locationStore', 'userStore')(observer(LocationComponent));

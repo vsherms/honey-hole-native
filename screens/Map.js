@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import { MapView } from 'expo';
 import { View, Text } from 'react-native';
-import Location from './Location';
+import LocationComponent from './LocationComponent';
 
 class Map extends React.Component {
   constructor(){
@@ -16,8 +16,7 @@ class Map extends React.Component {
   render() {
     return (
       <View style={{flex:1}}>
-        <Text style={{textAlign:'center', fontSize:30}}>Welcome to Honey Hole</Text>
-        <Location/>
+        <LocationComponent />
 
       </View>
     );

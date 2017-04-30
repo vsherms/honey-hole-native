@@ -5,10 +5,12 @@ import { NavigationProvider, StackNavigation } from '@expo/ex-navigation';
 import { FontAwesome } from '@expo/vector-icons';
 import { Provider } from 'mobx-react';
 import UserStore from './stores/UserStore';
+import LocationStore from './stores/LocationStore';
 
 import Router from './navigation/Router';
 import cacheAssetsAsync from './utilities/cacheAssetsAsync';
 const userStore = new UserStore();
+const locationStore = new LocationStore();
 
 class AppContainer extends React.Component {
   state = {
@@ -43,7 +45,7 @@ class AppContainer extends React.Component {
     if (this.state.appIsReady) {
       return (
         <View style={styles.container}>
-        <Provider userStore={userStore}>
+        <Provider userStore={userStore} locationStore={locationStore}>
           <NavigationProvider router={Router}>
             <StackNavigation
               id="root"

@@ -39,6 +39,7 @@ class Login extends React.Component {
     event.preventDefault();
     let user = {email: this.state.email, password: this.state.password};
     let navigator = this.props.navigator;
+    this.props.locationStore.navigator = navigator;
     this.props.userStore.authUser(user, navigator);
     this.props.userStore.setUser(user);
     this.setState({email: "", password: ""});
@@ -78,7 +79,8 @@ class Login extends React.Component {
 }
 
 Login.propTypes = {
-  userStore: React.PropTypes.object
+  userStore: React.PropTypes.object,
+  locationStore: React.PropTypes.object
 }
 
-export default inject('userStore')(observer(Login));
+export default inject('userStore', 'locationStore')(observer(Login));

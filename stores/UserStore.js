@@ -1,5 +1,4 @@
 import {extendObservable} from 'mobx';
-// import {browserHistory} from 'react-router';
 import React from 'react';
 import {
   createRouter,
