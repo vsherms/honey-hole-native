@@ -10,16 +10,22 @@ import {
   View,
 } from 'react-native';
 import LocationComponent from './LocationComponent';
+import { inject, observer } from 'mobx-react';
 
 import { MonoText } from '../components/StyledText';
 
-export default class HomeScreen extends React.Component {
+class HomeScreen extends React.Component {
   static route = {
     navigationBar: {
       visible: true,
       title: 'Honey Hole'
     },
   };
+
+  componentDidMount() {
+  this.props.locationStore.loadLocationsFromServer(this.props.userStore.userId);
+}
+
 
   render() {
     return (
@@ -152,3 +158,10 @@ const styles = StyleSheet.create({
     color: '#2e78b7',
   },
 });
+
+HomeScreen.propTypes = {
+  locationStore: React.PropTypes.object,
+  userStore: React.PropTypes.object
+}
+
+export default inject('locationStore', 'userStore')(observer(HomeScreen));
