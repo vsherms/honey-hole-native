@@ -1,5 +1,6 @@
 import React from 'react';
 import { inject, observer } from 'mobx-react';
+import { Button } from 'react-native-elements';
 import HoneyHole from './HoneyHole';
 import ListItem from './ListItem';
 import {
@@ -13,6 +14,9 @@ import {
   View,
 } from 'react-native';
 import { Constants, Location, Permissions, MapView } from 'expo';
+import Router from '../navigation/Router';
+import dateFormat from 'dateformat';
+import Swipeout from 'react-native-swipeout';
 
 
 class HoneyHoleLibrary extends React.Component{
@@ -42,12 +46,19 @@ class HoneyHoleLibrary extends React.Component{
 
   handleHoneyDetails(location, e){
     this.props.locationStore.honeyHoleClicked = true;
+    this.props.locationStore.currentLocation = location;
     this.setState({location: location});
+    this.props.locationStore.navigator.push(Router.getRoute('librarylink'));
   }
 
   handleDelete(location, e){
-    this.props.locationStore.deleteLocation(location._id);
-  }
+    console.log('hi');
+    // if (confirm('Are you sure you want to delete the honey?')) {
+      this.props.locationStore.deleteLocation(location._id);
+    // } else {
+    //   return null;
+    // }
+ }
 
   render(){
     const position = (this.props.locationStore.location == '' && this.props.locationStore.locations.length > 0 ?
@@ -60,25 +71,33 @@ class HoneyHoleLibrary extends React.Component{
     // latsLongs.forEach((data) => {
     //   bounds.extend(data.latLng);
     // });
+
     let locations = this.props.locationStore.locations.map((location, index) =>
       (
-        <View key={index}>
+        <Swipeout key={index} right={[
+            {
+              text: 'Delete',
+              backgroundColor:'red',
+              onPress:this.handleDelete.bind(null, location)
+            }
+          ]}
+          autoClose={true}
+         >
           <ListItem
-           title={location.date}
-           description={location.title}
+           title={location.title}
+           description={dateFormat(location.date,"mm/dd/yy")}
            onPress={this.handleHoneyDetails.bind(null, location)}
            />
-        </View>
+            </Swipeout>
       ));
-    //
-    // let markers = this.props.locationStore.locations.map((location, index) =>
-    //   (
-    //     <Marker key={index} position={[location.coordinates.latitude, location.coordinates.longitude]}>
-    //       <Popup>
-    //         <span style={{textAlign:'center'}}>{location.title}</span>
-    //       </Popup>
-    //     </Marker>
-    //   ));
+
+    let markers = this.props.locationStore.locations.map((location, index) =>
+      (
+        <MapView.Marker key={index}
+          styles={{zIndex: 1000}}
+          coordinate={location.coordinates}
+        />
+      ));
 
     let library = (
         <View style={{flex:1}}>
@@ -89,6 +108,7 @@ class HoneyHoleLibrary extends React.Component{
           latitudeDelta: 0.0922,
           longitudeDelta: 0.0421,
           }}>
+          {markers}
             <MapView.Marker
             styles={{zIndex: 1000}}
             coordinate={this.props.locationStore.location.coords}/>

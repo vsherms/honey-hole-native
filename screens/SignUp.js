@@ -1,5 +1,6 @@
 import React from 'react';
 import { observer, inject } from 'mobx-react';
+
 import {
   Image,
   Linking,
@@ -11,7 +12,7 @@ import {
   View,
 } from 'react-native';
 
-import { FormLabel, FormInput, Button } from 'react-native-elements';
+import { FormLabel, Button, FormInput } from 'react-native-elements';
 
 class SignUp extends React.Component {
   constructor(props) {

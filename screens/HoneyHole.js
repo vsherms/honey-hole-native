@@ -11,7 +11,7 @@ import {
   View,
 } from 'react-native';
 import { Constants, Location, Permissions, MapView } from 'expo';
-
+import dateFormat from 'dateformat';
 
 
 class HoneyHole extends React.Component{
@@ -45,7 +45,7 @@ class HoneyHole extends React.Component{
       <View style={{flex:1}}>
           {map}
           <Text>{this.props.location.title}!</Text>
-          <Text>Date: {this.props.location.date} </Text>
+          <Text>Date: {dateFormat(this.props.location.date,"dd/mm/yy")} </Text>
           <Text>Latitude: {Math.round(this.props.location.coordinates.latitude * 1000000)/1000000}</Text>
           <Text>Longitude: {Math.round(this.props.location.coordinates.longitude * 1000000)/1000000}</Text>
           <Text>Weather Conditions: {this.props.location.weather.conditions}</Text>

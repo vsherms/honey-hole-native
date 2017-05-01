@@ -1,6 +1,7 @@
 import React from 'react';
 import { inject, observer } from 'mobx-react';
 import Router from '../navigation/Router';
+
 // import HoneyHole from './HoneyHole';
 import {
   Image,
@@ -8,12 +9,11 @@ import {
   Platform,
   ScrollView,
   StyleSheet,
-  Text,
   TouchableOpacity,
   View,
 } from 'react-native';
 
-import { FormLabel, FormInput } from 'react-native-elements';
+import { FormLabel, Text, FormInput } from 'react-native-elements';
 import Button from 'react-native-button';
 
 
@@ -54,7 +54,7 @@ class Form extends React.Component {
   render(){
     let form = (
       <View>
-        <Text>Enter Field Notes</Text>
+        <Text h3>Enter Field Notes</Text>
         <FormLabel>Title</FormLabel>
         <FormInput
         onChange={this.handleTitleChange}

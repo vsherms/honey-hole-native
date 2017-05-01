@@ -5,6 +5,7 @@ import HomeScreen from '../screens/HomeScreen';
 import LinksScreen from '../screens/LinksScreen';
 import SettingsScreen from '../screens/SettingsScreen';
 import HoneyHoleLibrary from '../screens/HoneyHoleLibrary';
+import LibraryLinkScreen from '../screens/LibraryLinkScreen';
 import RootNavigation from './RootNavigation';
 
 export default createRouter(() => ({
@@ -12,5 +13,6 @@ export default createRouter(() => ({
   home: () => HomeScreen,
   links: () => LinksScreen,
   library: () => HoneyHoleLibrary,
+  librarylink: () => LibraryLinkScreen,
   rootNavigation: () => RootNavigation,
 }));

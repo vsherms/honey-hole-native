@@ -4,7 +4,7 @@ import { ExpoLinksView } from '@expo/samples';
 import { inject, observer } from 'mobx-react';
 import HoneyHole from './HoneyHole';
 
-class LinksScreen extends React.Component {
+class LibraryLinkScreen extends React.Component {
   static route = {
     navigationBar: {
       title: 'Honey Hole',
@@ -25,8 +25,8 @@ const styles = StyleSheet.create({
   },
 });
 
-LinksScreen.propTypes = {
+LibraryLinkScreen.propTypes = {
   locationStore: React.PropTypes.object
 };
 
-export default inject('locationStore')(observer(LinksScreen));
+export default inject('locationStore')(observer(LibraryLinkScreen));

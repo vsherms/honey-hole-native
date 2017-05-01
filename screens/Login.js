@@ -12,7 +12,7 @@ import {
   View,
 } from 'react-native';
 
-import { FormLabel, FormInput, Button } from 'react-native-elements';
+import { FormLabel, Button, FormInput } from 'react-native-elements';
 
 
 class Login extends React.Component {
