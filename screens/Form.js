@@ -14,7 +14,7 @@ import {
 } from 'react-native';
 
 import { FormLabel, Text, FormInput } from 'react-native-elements';
-import Button from 'react-native-button';
+import { Button } from 'react-native-elements';
 
 
 
@@ -53,8 +53,7 @@ class Form extends React.Component {
 
   render(){
     let form = (
-      <View>
-        <Text h3>Enter Field Notes</Text>
+      <View style={{flex:1, backgroundColor:'#f7f7f7'}}>
         <FormLabel>Title</FormLabel>
         <FormInput
         onChange={this.handleTitleChange}
@@ -65,20 +64,21 @@ class Form extends React.Component {
         value={this.state.notes}
         onChange={this.handleNotesChange}
         />
-        <Button
-          containerStyle={{padding:50, height: 155, overflow:'hidden', backgroundColor: 'red'}}
-          style={{fontSize: 25, color: 'white'}}
-          onPress={this.handleSaveFieldNotes}
-        >Save Your Field Notes!</Button>
+        <Button onPress={this.handleSaveFieldNotes}
+         title="Save Your Field Notes"
+         borderRadius={10}
+         large={true}
+         backgroundColor='#1aa3ff'
+         icon={{name: 'map-o', type: 'font-awesome'}}
+         />
+
       </View>
     );
 
     return(
-
-          <View style={{flex:1}}>
-            {form}
-          </View>
-
+      <View style={{flex:1}}>
+        {form}
+      </View>
     );
   }
 }

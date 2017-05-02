@@ -6,6 +6,7 @@ export default class SettingsScreen extends React.Component {
   static route = {
     navigationBar: {
       title: 'exp.json',
+      backgroundColor: '#e6e9ed',
     },
   };
 

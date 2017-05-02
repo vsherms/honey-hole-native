@@ -15,6 +15,14 @@ import Login from './Login';
 import { MonoText } from '../components/StyledText';
 
 export default class EntryScreen extends React.Component {
+  static route = {
+    navigationBar: {
+      title: 'Honey Hole',
+      backgroundColor: '#e6e9ed',
+    
+    },
+  };
+
 
 
   render() {

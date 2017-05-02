@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Platform, Text, View, StyleSheet } from 'react-native';
 import { Constants, Location, Permissions, MapView } from 'expo';
-import Button from 'react-native-button';
+import { Button } from 'react-native-elements';
 import Router from '../navigation/Router';
 import { inject, observer } from 'mobx-react';
 import Form from './Form';
@@ -74,11 +74,15 @@ class LocationComponent extends Component {
         styles={{zIndex: 1000}}
         coordinate={coords}/>
        </MapView>
-       <Button
-         containerStyle={{padding:50, height: 155, overflow:'hidden', backgroundColor: 'red'}}
-         style={{fontSize: 25, color: 'white'}}
-         onPress={this.handleSavePosition}
-       >Save Your Honey Hole!</Button>
+      <View style={{paddingBottom:10}}>
+       <Button onPress={this.handleSavePosition}
+        title="Save Your Honey Hole!"
+        borderRadius={10}
+        large={true}
+        backgroundColor='#1aa3ff'
+        icon={{name: 'map-marker', type: 'font-awesome'}}
+        />
+        </View>
      </View>
     )
 

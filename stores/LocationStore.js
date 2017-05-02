@@ -18,7 +18,8 @@ export default class LocationStore {
       defaultTitle: 'New Honey Hole',
       honeyHoleClicked: false,
       navigator: '',
-      loggedLocation: false
+      loggedLocation: false,
+      signUp: false
     });
 
     this.savePosition = this.savePosition.bind(this);

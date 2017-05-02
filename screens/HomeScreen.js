@@ -18,7 +18,8 @@ class HomeScreen extends React.Component {
   static route = {
     navigationBar: {
       visible: true,
-      title: 'Honey Hole'
+      title: 'Honey Hole',
+      backgroundColor: '#e6e9ed'
     },
   };
 

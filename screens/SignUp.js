@@ -1,5 +1,6 @@
 import React from 'react';
 import { observer, inject } from 'mobx-react';
+import Router from '../navigation/Router';
 
 import {
   Image,
@@ -29,6 +30,14 @@ class SignUp extends React.Component {
     this.handlePasswordChange = this.handlePasswordChange.bind(this);
     this.addUserToDatabase = this.addUserToDatabase.bind(this);
   }
+
+  static route = {
+    navigationBar: {
+      title: 'Honey Hole',
+      backgroundColor: '#e6e9ed',
+    },
+  };
+
 
   handleFirstNameChange(e) {
     console.log(e.nativeEvent.text);
@@ -69,6 +78,7 @@ class SignUp extends React.Component {
     .then(result => console.log(result));
     if(this.state.email && this.state.password){
       this.props.userStore.displayWelcome();
+      this.props.navigator.push(Router.getRoute('entry'));
       this.setState({firstName: "", lastName: "", email: "", password: "",});
     } else {
       this.props.userStore.failedEmailPassword = true;
@@ -79,7 +89,7 @@ class SignUp extends React.Component {
   render() {
     let logInMessage = (
       <Text>
-      Welcome to Life Coach!  Go ahead and log in!
+      Welcome to Honey Hole!  Go ahead and log in!
       </Text>
     );
 
@@ -91,46 +101,47 @@ class SignUp extends React.Component {
 
     let signUpForm = (
       <View>
-        <Text>Sign Up</Text>
-
-            <View style={{marginBottom:10}}>
-              <FormLabel>First Name</FormLabel>
-              <FormInput
-                onChange={this.handleFirstNameChange}
-                value={this.state.firstName}
-                />
-            </View>
-            <View style={{marginBottom:10}}>
-              <FormLabel>Last Name</FormLabel>
-              <FormInput
-                onChange={this.handleLastNameChange}
-                value={this.state.lastName}
-                />
-            </View>
-            <View style={{marginBottom:10}}>
-              <FormLabel>Email</FormLabel>
-              <FormInput
-                onChange={this.handleEmailChange}
-                value={this.state.email}
-                />
-            </View>
-            <View style={{marginBottom:10}}>
-              <FormLabel>Password</FormLabel>
-              <FormInput
-                onChange={this.handlePasswordChange}
-                value={this.state.password}
-                />
-            </View>
-            <Button
-              onPress={this.addUserToDatabase}
-              title="Sign Up"
-              className="submitForm"/>
-              {this.props.userStore.userCreated ? logInMessage: <Text></Text>}
-              {this.props.userStore.failedEmailPassword ? noEmail: <Text></Text>}
+        <View style={{marginBottom:10}}>
+          <FormLabel>First Name</FormLabel>
+          <FormInput
+            onChange={this.handleFirstNameChange}
+            value={this.state.firstName}
+            />
+        </View>
+        <View style={{marginBottom:10}}>
+          <FormLabel>Last Name</FormLabel>
+          <FormInput
+            onChange={this.handleLastNameChange}
+            value={this.state.lastName}
+            />
+        </View>
+        <View style={{marginBottom:10}}>
+          <FormLabel>Email</FormLabel>
+          <FormInput
+            onChange={this.handleEmailChange}
+            value={this.state.email}
+            />
+        </View>
+        <View style={{marginBottom:10}}>
+          <FormLabel>Password</FormLabel>
+          <FormInput
+            onChange={this.handlePasswordChange}
+            value={this.state.password}
+            />
+        </View>
+          <Button
+           onPress={this.addUserToDatabase}
+           title="Sign Up"
+           borderRadius={10}
+           large={true}
+           backgroundColor='#1aa3ff'
+           icon={{name: 'user-plus', type: 'font-awesome'}}
+           />
+          {this.props.userStore.failedEmailPassword ? noEmail: null}
       </View>
     );
     return(
-        <View>
+        <View style={{flex:1, backgroundColor:'#f7f7f7'}}>
           {signUpForm}
         </View>
     );

@@ -8,6 +8,7 @@ class LibraryLinkScreen extends React.Component {
   static route = {
     navigationBar: {
       title: 'Honey Hole',
+      backgroundColor: '#e6e9ed',
     },
   };
 

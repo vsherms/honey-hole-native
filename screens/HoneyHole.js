@@ -42,7 +42,7 @@ class HoneyHole extends React.Component{
        </View>
     );
     return(
-      <View style={{flex:1}}>
+      <View style={{flex:1, backgroundColor:'#f7f7f7'}}>
           {map}
           <Text>{this.props.location.title}!</Text>
           <Text>Date: {dateFormat(this.props.location.date,"dd/mm/yy")} </Text>

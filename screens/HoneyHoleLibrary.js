@@ -32,7 +32,8 @@ class HoneyHoleLibrary extends React.Component{
   static route = {
     navigationBar: {
       visible: true,
-      title: 'Library'
+      title: 'Library',
+      backgroundColor: '#e6e9ed',
     },
   };
 
@@ -117,7 +118,7 @@ class HoneyHoleLibrary extends React.Component{
       );
 
     return(
-      <View style={{flex:1}}>
+      <View style={{flex:1, backgroundColor:'#f7f7f7'}}>
         {library}
       <ScrollView>
         {locations}
