@@ -11,10 +11,10 @@ import {
   StyleSheet,
   TouchableOpacity,
   View,
+  TextInput
 } from 'react-native';
 
-import { FormLabel, Text, FormInput } from 'react-native-elements';
-import { Button } from 'react-native-elements';
+import { FormLabel, Text, Button, FormInput } from 'react-native-elements';
 
 
 
@@ -61,17 +61,21 @@ class Form extends React.Component {
         />
         <FormLabel>Notes</FormLabel>
         <FormInput
+        multiline={true}
+        numberOfLines = {10}
+        inputStyle={{height:100}}
         value={this.state.notes}
         onChange={this.handleNotesChange}
         />
-        <Button onPress={this.handleSaveFieldNotes}
-         title="Save Your Field Notes"
-         borderRadius={10}
-         large={true}
-         backgroundColor='#1aa3ff'
-         icon={{name: 'map-o', type: 'font-awesome'}}
-         />
-
+        <View style={{paddingTop:10}}>
+          <Button onPress={this.handleSaveFieldNotes}
+           title="Save Your Field Notes"
+           borderRadius={10}
+           large={true}
+           backgroundColor='#1aa3ff'
+           icon={{name: 'map-o', type: 'font-awesome'}}
+           />
+         </View>
       </View>
     );
 

@@ -83,13 +83,13 @@ class HoneyHoleLibrary extends React.Component{
             }
           ]}
           autoClose={true}
-         >
+        >
           <ListItem
            title={location.title}
            description={dateFormat(location.date,"mm/dd/yy")}
            onPress={this.handleHoneyDetails.bind(null, location)}
            />
-            </Swipeout>
+        </Swipeout>
       ));
 
     let markers = this.props.locationStore.locations.map((location, index) =>
